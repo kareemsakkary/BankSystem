@@ -9,10 +9,12 @@ SavingsBankAccount::SavingsBankAccount() {
 
 SavingsBankAccount::SavingsBankAccount(double balance) {
     this->minimumBalance=1000;
-    this->balance = balance;
+    if (balance>=minimumBalance){
+        this->balance = balance;
+
+    }
 
 }
-
 SavingsBankAccount::SavingsBankAccount(double init_balance,double minimumBalance) {
     if (init_balance < minimumBalance) {
         cout << "Initial balance is less than minimum balance" << endl;
