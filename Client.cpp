@@ -10,6 +10,13 @@ this->phone = phone;
 this->bankAcc = BA;
 this->accountID = BA->get_AccountID();
 }
+client::client(string name , string address , string  phone,SavingsBankAccount* BA){
+    this->name = name;
+    this->address = address;
+    this->phone = phone;
+    this->bankAcc = BA;
+    this->accountID = BA->get_AccountID();
+}
 void client::set_name(string name){
     this->name = name;
 }

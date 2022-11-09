@@ -3,4 +3,4 @@ project(BankSystem)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(BankSystem main.cpp classes.h Client.cpp BankApplication.cpp BankAccount.cpp SavingBankAccount.cpp DataManage.cpp)
+add_executable(BankSystem main.cpp classes.h Client.cpp BankApplication.cpp BankAccount.cpp SavingBankAccount.cpp DataManage.cpp BankApp.cpp)

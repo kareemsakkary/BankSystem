@@ -18,7 +18,7 @@ public:
     BankAccount( double b);
     BankAccount(string id, double b);
     void set_balance(double b);
-    void set_accountID(string id);
+    void set_accountID();
     double get_balance();
     string get_AccountID();
     void set_client(class client* c);
@@ -46,6 +46,7 @@ private:
     string accountID;
 public:
     BankAccount* bankAcc;
+    client(string name, string address, string phone, SavingsBankAccount *BA);
     client(string name , string address , string  phone ,BankAccount* BA);
     void set_name(string name);
     void set_address(string address);
@@ -54,6 +55,17 @@ public:
     string get_address();
     string get_phone();
     void set_account_pointer(BankAccount* BA);
+};
+class BankApplication{
+    private:
+    vector<client> Clist;
+    vector<BankAccount> Bankaccs;
+    public:
+    void mainMenu();
+    void addClient();
+    void deposit();
+    void withdraw();
+    void list_clients();
 };
 
 #endif //BANKSYSTEM_CLASSES_H

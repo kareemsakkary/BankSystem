@@ -6,6 +6,10 @@
 
 BankAccount::BankAccount(){
     balance = 0;
+    for(int i=0;i<10;i++){
+        int x = rand()%10;
+        accountID+= to_string(x);
+    }
 }
 BankAccount::BankAccount( double b){
     balance = b;
@@ -22,8 +26,11 @@ void BankAccount::set_client(class client *c) {
 void BankAccount::set_balance(double b){
     balance = b;
 }
-void BankAccount::set_accountID(string id){
-    accountID = id;
+void BankAccount::set_accountID(){
+        for(int i=0;i<10;i++){
+            int x = rand()%10;
+            accountID+= to_string(x);
+        }
 }
 double BankAccount::get_balance(){
     return balance;
