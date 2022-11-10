@@ -12,19 +12,24 @@ void BankApplication::addClient() {
     cin>>p;
     cout<<"Please enter your address"<<endl;
     cin>>addr;
-    cout<<"What Type of Account Do You Like? (1) Basic (2) Saving – Type 1 or 2"<<endl;
+    cout<<"What Type of Account Do You Like? (1) Basic (2) Saving - Type 1 or 2"<<endl;
     int type;
     cin>>type;
+    cout<<"Please enter your balance"<<endl;
+    double b;
+    cin>>b;
+
     string counter = to_string(dm.size+1);
     string id = string(4-counter.size() , '0');
     id += counter;
+
     if(type == 1) {
-        BankAccount *BA =new BankAccount(id);
+        BankAccount *BA =new BankAccount(id,b);
         client cl = client(n,addr,p,BA);
         dm.add_client(cl);
     }
     else if(type == 2){
-        BankAccount *BA = new SavingsBankAccount(id);
+        BankAccount *BA = new SavingsBankAccount(id,b);
         client cl = client(n,addr,p,BA);
         dm.add_client(cl);
     }
@@ -32,29 +37,15 @@ void BankApplication::addClient() {
         cout<<"Invalid Input"<<endl;
     }
 
-    cout<<"Please enter your balance"<<endl;
-    double b;
-    cin>>b;
-   // Clist[Clist.size()-1].bankAcc->set_balance(b);
-  //  cout<<"Client Balance: "<<Clist[Clist.size()-1].bankAcc->get_balance()<<endl;
-    //cout<<"An account created with ID"<<Clist[Clist.size()-1].bankAcc->get_AccountID()<<"and starting balance"<<Clist[Clist.size()-1].bankAcc->get_balance()<<endl;
 }
 
 void BankApplication::deposit() {
     cout<<"Please Enter Your Account ID"<<endl;
     string id;
     cin>>id;
-//    for(int i = 0 ; i < Clist.size() ; i++){
-//        if(Clist[i].bankAcc->get_AccountID() == id){
-//            cout<<"Please Enter The Amount You Want To Deposit"<<endl;
-//            double amount;
-//            cin>>amount;
-//            Clist[i].bankAcc->deposit(amount);
-//            cout<<"Your New Balance is: "<<Clist[i].bankAcc->get_balance()<<endl;
-//            return;
-//        }
-//    }
-    cout<<"Invalid Account ID"<<endl;
+    client cl = dm.get_client(id);
+    cout << cl.get_name();
+//    cout<<"Invalid Account ID"<<endl;
 }
 void BankApplication::withdraw() {
     cout<<"Please Enter Your Account ID"<<endl;
