@@ -41,28 +41,35 @@ void dataManger::add_client(client& cl) {
 
 client dataManger::get_client(string id) {
     string sql = "SELECT name,address,phone,accountID,balance,minimumBalance,accountType FROM client where accountID = '" + id + "';";
-    int res = sqlite3_prepare_v2(db,sql.c_str(),-1,&stmt,NULL);
-    sqlite3_step(stmt);
-    if(res == SQLITE_OK) {
-        string name((char *) sqlite3_column_text(stmt, 0));
-        string address((char *) sqlite3_column_text(stmt, 1));
-        string phone((char *) sqlite3_column_text(stmt, 2));
-        string accountID((char *) sqlite3_column_text(stmt, 3));
-        double balance = sqlite3_column_double(stmt, 4);
-        double balanceMin = sqlite3_column_double(stmt, 5);
-        string type((char *) sqlite3_column_text(stmt, 6));
-        BankAccount *Ba;
-        if (type == "regular") {
-            Ba = new BankAccount(id, balance);
-        } else {
-            Ba = new SavingsBankAccount(id, balance, balanceMin);
+    int res;
+    try {
+        res = sqlite3_prepare_v2(db,sql.c_str(),-1,&stmt,NULL);
+        if(res == SQLITE_OK) {
+            sqlite3_step(stmt);
+            string name((char *) sqlite3_column_text(stmt, 0));
+            string address((char *) sqlite3_column_text(stmt, 1));
+            string phone((char *) sqlite3_column_text(stmt, 2));
+            string accountID((char *) sqlite3_column_text(stmt, 3));
+            double balance = sqlite3_column_double(stmt, 4);
+            double balanceMin = sqlite3_column_double(stmt, 5);
+            string type((char *) sqlite3_column_text(stmt, 6));
+            BankAccount *Ba;
+            if (type == "regular") {
+                Ba = new BankAccount(id, balance);
+            } else {
+                Ba = new SavingsBankAccount(id, balance, balanceMin);
+            }
+            client *ca = new client(name, address, phone, Ba);
+            sqlite3_finalize(stmt);
+            return *ca;
+        }else{
+            BankAccount *Ba= new BankAccount(id, 132);
+            client *ca = new client("error" , "err" , "0000" ,Ba);
+            return *ca;
         }
-        client *ca = new client(name, address, phone, Ba);
-        sqlite3_finalize(stmt);
-        return *ca;
-    }else{
+    } catch (exception e) {
         BankAccount *Ba= new BankAccount(id, 132);
-        client *ca = new client("error" , "err" , "000" ,Ba);
+        client *ca = new client("error" , "err" , "0000" ,Ba);
         return *ca;
     }
 }
