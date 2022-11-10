@@ -4,17 +4,10 @@
 
 #include "classes.h"
 
-BankAccount::BankAccount(){
+BankAccount::BankAccount(string id){
     balance = 0;
-    for(int i=0;i<10;i++){
-        int x = rand()%10;
-        accountID+= to_string(x);
-    }
+    accountID = id;
 }
-BankAccount::BankAccount( double b){
-    balance = b;
-}
-
 BankAccount::BankAccount(string id, double b){
     accountID = id;
     balance = b;

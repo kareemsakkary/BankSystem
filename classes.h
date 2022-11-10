@@ -18,8 +18,7 @@ protected:
     string type = "regular";
 public:
     client* client;
-    BankAccount();
-    BankAccount( double b);
+    BankAccount(string id);
     BankAccount(string id, double b);
     void set_balance(double b);
     void set_accountID(string id);
@@ -38,9 +37,9 @@ public:
 
 class  SavingsBankAccount: public BankAccount{
 public:
-    SavingsBankAccount();
-    SavingsBankAccount(double balance) ;
-    SavingsBankAccount(double init_balance,double minimumBalance) ;
+    SavingsBankAccount(string id);
+    SavingsBankAccount(string id,double balance) ;
+    SavingsBankAccount(string id,double init_balance,double minimumBalance) ;
     void withdraw(double amount);
     void deposit(double amount);
 };
@@ -66,10 +65,25 @@ public:
     void set_account_pointer(BankAccount* BA);
 };
 
+
+
+class dataManger{
+private:
+    sqlite3 *db;
+    sqlite3_stmt *stmt;
+public:
+    int size;
+    dataManger();
+    void add_client(client& cl);
+    client get_client(string id);
+    void get_all_client(vector<client>& cls);
+    void update_balance(client& id, double balance);
+
+};
+
 class BankApplication{
     private:
-    vector<client> Clist;
-    vector<BankAccount> Bankaccs;
+    dataManger dm;
     public:
     void mainMenu();
     void addClient();
@@ -78,18 +92,4 @@ class BankApplication{
     void list_clients();
 };
 
-
-class dataManger{
-private:
-    sqlite3 *db;
-    sqlite3_stmt *stmt;
-public:
-
-    dataManger();
-    void add_client(client& cl);
-    client get_client(string id);
-    void get_all_client(vector<client> & clients);
-    void update_balance(client& id, double balance);
-
-};
 #endif //BANKSYSTEM_CLASSES_H

@@ -13,6 +13,11 @@ dataManger::dataManger() {
 
         if(res != SQLITE_OK){
             cout << "can`t connect to database error" << sqlite3_errmsg(db) << endl;
+        }else{
+            cout << "connected"  << endl;
+            vector<client> cls;
+            this->get_all_client(cls);
+            this->size = cls.size();
         }
     }
 }
@@ -27,7 +32,8 @@ void dataManger::add_client(client& cl) {
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);
     if(res == SQLITE_OK){
-        cout << "added";
+        cout << "added" << endl;
+        dataManger::size++;
     }else{
         cout << "can`t connect to database error" << sqlite3_errmsg(db) << endl;
     }
@@ -50,19 +56,19 @@ client dataManger::get_client(string id) {
     if(type=="regular"){
         Ba = new BankAccount(id,balance);
     }else{
-        Ba = new SavingsBankAccount(balance,balanceMin);
-        Ba ->set_accountID(id);
+        Ba = new SavingsBankAccount(id,balance,balanceMin);
     }
     client ca(name,address,phone,Ba);
     sqlite3_finalize(stmt);
     return ca;
 }
 
-void dataManger::get_all_client(vector<client> &clients) {
-    clients = {};
+
+void dataManger::get_all_client(vector<client>& clients) {
+   clients = {};
     string sql = "SELECT name,address,phone,accountID,balance,minimumBalance,accountType FROM client;";
-    int res = sqlite3_prepare_v2(db,sql.c_str(),1000,&stmt,0);
-    while( sqlite3_step(stmt) == SQLITE_ROW) {
+    int res = sqlite3_prepare_v2(db,sql.c_str(),-1,&stmt,NULL);
+    while( (res = sqlite3_step(stmt) == SQLITE_ROW)) {
         string name((char *) sqlite3_column_text(stmt, 0));
         string address((char *) sqlite3_column_text(stmt, 1));
         string phone((char *) sqlite3_column_text(stmt, 2));
@@ -70,20 +76,19 @@ void dataManger::get_all_client(vector<client> &clients) {
         double balance = sqlite3_column_double(stmt, 4);
         double balanceMin = sqlite3_column_double(stmt, 5);
         string type((char *) sqlite3_column_text(stmt, 6));
-
+//        cout << name << address << phone << accountID << balance << endl;
         BankAccount *Ba;
 
         if (type == "regular") {
             Ba = new BankAccount(accountID, balance);
         } else {
-            Ba = new SavingsBankAccount(balance, balanceMin);
-            Ba->set_accountID(accountID);
+            Ba = new SavingsBankAccount(accountID,balance, balanceMin);
+
         }
-        client ca(name, address, phone, Ba);
-        clients.push_back(ca);
+        client* ca = new client(name, address, phone, Ba);
+        clients.emplace_back(*ca);
     }
-    sqlite3_finalize(stmt);
-}
+ }
 
 void dataManger::update_balance(client& client, double balance) {
     string sql = "UPDATE client set balance = " + to_string(balance) + " Where accountID = " + client.bankAcc->get_AccountID() + ";";

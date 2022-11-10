@@ -4,18 +4,19 @@
 
 #include "classes.h"
 
-SavingsBankAccount::SavingsBankAccount() {
+SavingsBankAccount::SavingsBankAccount(string id):BankAccount(id) {
     type = "saving";
+
 }
 
-SavingsBankAccount::SavingsBankAccount(double balance) {
+SavingsBankAccount::SavingsBankAccount(string id,double balance):BankAccount(id) {
     this->minimumBalance=1000;
     if (balance>=minimumBalance){
         this->balance = balance;
     }
     type = "saving";
 }
-SavingsBankAccount::SavingsBankAccount(double init_balance,double minimumBalance) {
+SavingsBankAccount::SavingsBankAccount(string id,double init_balance,double minimumBalance):BankAccount(id) {
     if (init_balance < minimumBalance) {
         cout << "Initial balance is less than minimum balance" << endl;
     }
