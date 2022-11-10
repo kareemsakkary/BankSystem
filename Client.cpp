@@ -38,3 +38,6 @@ string client::get_phone(){
 void client::set_account_pointer(BankAccount* BA){
     this->bankAcc = BA;
 }
+client::~client(){
+    delete bankAcc;
+}

@@ -5,15 +5,15 @@
 #include "classes.h"
 
 SavingsBankAccount::SavingsBankAccount() {
+    type = "saving";
 }
 
 SavingsBankAccount::SavingsBankAccount(double balance) {
     this->minimumBalance=1000;
     if (balance>=minimumBalance){
         this->balance = balance;
-
     }
-
+    type = "saving";
 }
 SavingsBankAccount::SavingsBankAccount(double init_balance,double minimumBalance) {
     if (init_balance < minimumBalance) {
@@ -23,6 +23,8 @@ SavingsBankAccount::SavingsBankAccount(double init_balance,double minimumBalance
         balance = init_balance;
     }
     this->minimumBalance = minimumBalance;
+    type = "saving";
+
 }
 
 

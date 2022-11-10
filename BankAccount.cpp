@@ -26,11 +26,8 @@ void BankAccount::set_client(class client *c) {
 void BankAccount::set_balance(double b){
     balance = b;
 }
-void BankAccount::set_accountID(){
-        for(int i=0;i<10;i++){
-            int x = rand()%10;
-            accountID+= to_string(x);
-        }
+void BankAccount::set_accountID(string id){
+        accountID = id;
 }
 double BankAccount::get_balance(){
     return balance;
@@ -51,3 +48,20 @@ void BankAccount::withdraw(double amount){
         cout << "Your balance is insufficient" << endl;
     }
 }
+
+double BankAccount::get_MinimumBalance() const {
+    return minimumBalance;
+}
+
+void BankAccount::set_MinimumBalance(double minimumBalance) {
+    BankAccount::minimumBalance = minimumBalance;
+}
+
+const string &BankAccount::getType() const {
+    return type;
+}
+
+void BankAccount::setType(const string &type) {
+    BankAccount::type = type;
+}
+
