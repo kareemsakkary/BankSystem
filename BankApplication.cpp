@@ -44,37 +44,38 @@ void BankApplication::deposit() {
     string id;
     cin>>id;
     client cl = dm.get_client(id);
-    cout << cl.get_name();
-//    cout<<"Invalid Account ID"<<endl;
+    if(id==cl.bankAcc->get_AccountID()) {
+        cout << "Please enter The amount you want to deposit" << endl;
+        double amount;
+        cin >> amount;
+        cl.bankAcc->deposit(amount);
+        cout << "Your New Balance is: " << cl.bankAcc->get_balance() << endl;
+    }
+    else
+        cout<<"Invalid Account ID"<<endl;
+
 }
 void BankApplication::withdraw() {
     cout<<"Please Enter Your Account ID"<<endl;
     string id;
     cin>>id;
-//    for(int i = 0 ; i < Clist.size() ; i++){
-//        if(Clist[i].bankAcc->get_AccountID() == id){
-//            cout<<"Please Enter The Amount You Want To Withdraw"<<endl;
-//            double amount;
-//            cin>>amount;
-//            Clist[i].bankAcc->withdraw(amount);
-//            cout<<"Your New Balance is: "<<Clist[i].bankAcc->get_balance()<<endl;
-//            return;
-//        }
-//    }
+    client cl = dm.get_client(id);
+    if(id==cl.bankAcc->get_AccountID()) {
+        cout << "Please enter The amount you want to withdraw" << endl;
+        double amount;
+        cin >> amount;
+        cl.bankAcc->withdraw(amount);
+        cout << "Your New Balance is: " << cl.bankAcc->get_balance() << endl;
+    }
+    else
     cout<<"Invalid Account ID"<<endl;
 }
 void BankApplication::list_clients(){
-    cout<<"Please Enter Your Account ID"<<endl;
-    string id;
-    cin>>id;
-//    for(int i = 0 ; i < Clist.size() ; i++){
-//        if(Clist[i].bankAcc->get_AccountID() == id){
-//            cout<<"Your Name: "<<Clist[i].get_name()<<endl;
-//            cout<<"Your Address: "<<Clist[i].get_address()<<endl;
-//            cout<<"Your Phone: "<<Clist[i].get_phone()<<endl;
-//            cout<<"Your Balance: "<<Clist[i].bankAcc->get_balance()<<endl;
-//            return;
-//        }
-//    }
-    cout<<"Invalid Account ID"<<endl;
+    vector<client>listing;
+    dm.get_all_client(listing);
+    for(int i=0;i<listing.size();i++){
+        cout<<i<<"- "<<listing[i].get_name()<<",";
+        cout<<listing[i].get_phone()<<",";
+        cout<<listing[i].get_address()<<"."<<endl;
+    }
 }
