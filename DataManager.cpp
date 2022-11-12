@@ -68,7 +68,7 @@ client dataManger::get_client(string id) {
             return *ca;
         }
     } catch (exception e) {
-        BankAccount *Ba= new BankAccount(id, 132);
+        BankAccount *Ba= new BankAccount("***", 132);
         client *ca = new client("error" , "err" , "0000" ,Ba);
         return *ca;
     }
