@@ -72,7 +72,7 @@ void BankApplication::withdraw() {
 }
 void BankApplication::list_clients(){
     vector<client>listing;
-    dm.get_all_client(listing);
+    dm.get_all_clients(listing);
     for(int i=0;i<listing.size();i++){
         cout<<i<<"- "<<listing[i].get_name()<<",";
         cout<<listing[i].get_phone()<<",";

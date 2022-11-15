@@ -16,7 +16,7 @@ dataManger::dataManger() {
         }else{
             cout << "connected"  << endl;
             vector<client> cls;
-            this->get_all_client(cls);
+            this->get_all_clients(cls);
             this->size = cls.size();
         }
     }
@@ -75,7 +75,7 @@ client dataManger::get_client(string id) {
 }
 
 
-void dataManger::get_all_client(vector<client>& clients) {
+void dataManger::get_all_clients(vector<client>& clients) {
    clients = {};
     string sql = "SELECT name,address,phone,accountID,balance,minimumBalance,accountType FROM client;";
     int res = sqlite3_prepare_v2(db,sql.c_str(),-1,&stmt,NULL);

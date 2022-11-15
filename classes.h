@@ -29,15 +29,13 @@ public:
     virtual void withdraw(double amount);
     double get_MinimumBalance() const;
     void set_MinimumBalance(double minimumBalance);
-
-    const string &getType() const;
-
-    void setType(const string &type);
+    const string& getType() const;
+//    void setType(const string &type);
 };
 
 class  SavingsBankAccount: public BankAccount{
 public:
-    SavingsBankAccount(string id);
+//    SavingsBankAccount(string id);
     SavingsBankAccount(string id,double balance) ;
     SavingsBankAccount(string id,double init_balance,double minimumBalance) ;
     void withdraw(double amount);
@@ -50,11 +48,9 @@ private:
     string   name;
     string address;
     string  phone;
-    string accountID;
 public:
     BankAccount* bankAcc;
     ~client();
-    client(string name, string address, string phone, SavingsBankAccount *BA);
     client(string name , string address , string  phone ,BankAccount* BA);
     void set_name(string name);
     void set_address(string address);
@@ -62,7 +58,7 @@ public:
     string get_name();
     string get_address();
     string get_phone();
-    void set_account_pointer(BankAccount* BA);
+//    void set_account_pointer(BankAccount* BA);
 };
 
 
@@ -70,13 +66,13 @@ public:
 class dataManger{
 private:
     sqlite3 *db;
-    sqlite3_stmt *stmt;
+        sqlite3_stmt *stmt;
 public:
     int size;
     dataManger();
     void add_client(client& cl);
     client get_client(string id);
-    void get_all_client(vector<client>& cls);
+    void get_all_clients(vector<client>& cls);
     void update_balance(client& id, double balance);
 
 };
