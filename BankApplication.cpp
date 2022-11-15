@@ -68,14 +68,36 @@ void BankApplication::withdraw() {
         cout << "Your New Balance is: " << cl.bankAcc->get_balance() << endl;
     }
     else
-    cout<<"Invalid Account ID"<<endl;
+        cout<<"Invalid Account ID"<<endl;
 }
 void BankApplication::list_clients(){
     vector<client>listing;
     dm.get_all_clients(listing);
     for(int i=0;i<listing.size();i++){
-        cout<<i<<"- "<<listing[i].get_name()<<",";
-        cout<<listing[i].get_phone()<<",";
+        cout<<i+1<<" - "<<listing[i].get_name()<<", ";
+        cout<<listing[i].get_phone()<<", ";
         cout<<listing[i].get_address()<<"."<<endl;
     }
+}
+void main_menu(){
+    int choice;
+    cout<<"Welcome to FCAI Banking Application\n";
+    cout<<"Welcome to FCAI Banking Application\n"
+          "1. Create a New Account\n"
+          "2. List Clients and Accounts\n"
+          "3. Withdraw Money\n"
+          "4. Deposit Money ";
+    cin>>choice;
+    switch(choice){
+        case 1:
+            void addclient();
+        case 2:
+            void lists_clients();
+        case 3:
+            void withdraw();
+        case 4:
+            void deposit();
+    }
+
+
 }
