@@ -66,7 +66,7 @@ public:
 class dataManger{
 private:
     sqlite3 *db;
-        sqlite3_stmt *stmt;
+     sqlite3_stmt *stmt;
 public:
     int size;
     dataManger();

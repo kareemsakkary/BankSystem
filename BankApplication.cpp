@@ -79,7 +79,7 @@ void BankApplication::list_clients(){
         cout<<listing[i].get_address()<<"."<<endl;
     }
 }
-void main_menu(){
+void BankApplication::mainMenu(){
     int choice;
     cout<<"Welcome to FCAI Banking Application\n";
     cout<<"Welcome to FCAI Banking Application\n"
@@ -91,12 +91,16 @@ void main_menu(){
     switch(choice){
         case 1:
             void addclient();
+            break;
         case 2:
             void lists_clients();
+            break;
         case 3:
             void withdraw();
+            break;
         case 4:
             void deposit();
+            break;
     }
 
 

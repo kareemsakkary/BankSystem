@@ -54,7 +54,5 @@ const string &BankAccount::getType() const {
     return type;
 }
 
-void BankAccount::setType(const string &type) {
-    BankAccount::type = type;
-}
+
 

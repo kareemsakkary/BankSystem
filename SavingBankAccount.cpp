@@ -4,10 +4,10 @@
 
 #include "classes.h"
 
-SavingsBankAccount::SavingsBankAccount(string id):BankAccount(id) {
-    type = "saving";
-
-}
+//SavingsBankAccount::SavingsBankAccount(string id):BankAccount(id) {
+//    type = "saving";
+//
+//}
 
 SavingsBankAccount::SavingsBankAccount(string id,double balance):BankAccount(id) {
     this->minimumBalance=1000;
