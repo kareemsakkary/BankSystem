@@ -102,9 +102,15 @@ void dataManger::get_all_clients(vector<client>& clients) {
  }
 
 void dataManger::update_balance(client& client, double balance) {
-    string sql = "UPDATE client set balance = " + to_string(balance) + " Where accountID = " + client.bankAcc->get_AccountID() + ";";
-    int res = sqlite3_prepare_v2(db,sql.c_str(),1000,&stmt,0);
+    string sql = "UPDATE client set balance = '" + to_string(balance) + "' Where accountID = '" + client.bankAcc->get_AccountID() + "';";
+//    cout << sql <<endl;
+
+    int res = sqlite3_prepare_v2(db,sql.c_str(),-1,&stmt,0);
     sqlite3_step(stmt);
     sqlite3_finalize(stmt);
-    client.bankAcc->set_balance(balance);
+    if(res == SQLITE_OK) {
+//        cout << "updated" << endl;
+    }else{
+//        cout << "can`t connect to database error" << sqlite3_errmsg(db) << endl;
+    }
 }

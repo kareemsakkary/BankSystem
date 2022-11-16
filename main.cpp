@@ -2,6 +2,6 @@
 #include "classes.h"
 int main() {
     BankApplication app;
-//    app.mainMenu();
+    app.mainMenu();
     return 0;
 }

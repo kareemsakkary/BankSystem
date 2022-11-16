@@ -49,6 +49,7 @@ void BankApplication::deposit() {
         double amount;
         cin >> amount;
         cl.bankAcc->deposit(amount);
+        dm.update_balance(cl, cl.bankAcc->get_balance());
         cout << "Your New Balance is: " << cl.bankAcc->get_balance() << endl;
     }
     else
@@ -65,6 +66,7 @@ void BankApplication::withdraw() {
         double amount;
         cin >> amount;
         cl.bankAcc->withdraw(amount);
+        dm.update_balance(cl, cl.bankAcc->get_balance());
         cout << "Your New Balance is: " << cl.bankAcc->get_balance() << endl;
     }
     else
@@ -81,25 +83,25 @@ void BankApplication::list_clients(){
 }
 void BankApplication::mainMenu(){
     int choice;
-    cout<<"Welcome to FCAI Banking Application\n";
-    cout<<"Welcome to FCAI Banking Application\n"
-          "1. Create a New Account\n"
-          "2. List Clients and Accounts\n"
-          "3. Withdraw Money\n"
-          "4. Deposit Money ";
+    cout<<"Welcome to FCAI Banking Application\n"<<
+          "1. Create a New Account\n"<<
+          "2. List Clients and Accounts\n"<<
+          "3. Withdraw Money\n"<<
+          "4. Deposit Money \n"<<
+          "Input your choice: ";
     cin>>choice;
     switch(choice){
         case 1:
-            void addclient();
+             addClient();
             break;
         case 2:
-            void lists_clients();
+            list_clients();
             break;
         case 3:
-            void withdraw();
+             withdraw();
             break;
         case 4:
-            void deposit();
+             deposit();
             break;
     }
 
