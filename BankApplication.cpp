@@ -73,13 +73,13 @@ void BankApplication::withdraw() {
         cout<<"Invalid Account ID"<<endl;
 }
 void BankApplication::list_clients(){
-    vector<client>listing;
-    dm.get_all_clients(listing);
+    vector<client*>listing = dm.get_all_clients();
     for(int i=0;i<listing.size();i++){
-        cout<<i+1<<" - "<<listing[i].get_name()<<", ";
-        cout<<listing[i].get_phone()<<", ";
-        cout<<listing[i].get_address()<<"."<<endl;
+        cout<<i+1<<" - "<<listing[i]->get_name()<<", ";
+        cout<<listing[i]->get_phone()<<", ";
+        cout<<listing[i]->get_address()<<"."<<endl;
     }
+    cout << "here";
 }
 void BankApplication::mainMenu(){
     int choice;
@@ -103,6 +103,8 @@ void BankApplication::mainMenu(){
         case 4:
              deposit();
             break;
+        default:
+            cout<<"Invalid Input"<<endl;
     }
 
 

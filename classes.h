@@ -72,7 +72,7 @@ public:
     dataManger();
     void add_client(client& cl);
     client get_client(string id);
-    void get_all_clients(vector<client>& cls);
+    vector<client*> get_all_clients();
     void update_balance(client& id, double balance);
 
 };

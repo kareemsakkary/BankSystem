@@ -2,6 +2,9 @@
 #include "classes.h"
 int main() {
     BankApplication app;
-    app.mainMenu();
+    while (true){
+        app.mainMenu();
+        system("pause");
+    }
     return 0;
 }
